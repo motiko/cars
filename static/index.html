@@ -1,0 +1,100 @@
+<!doctype html>
+
+<html ng-app="app">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cars</title>   
+
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        th{
+            background: blue;
+        }
+        tr>td{
+            background: white;
+        }
+        tr>td.Asia{
+            background: gray;
+        }
+        tr:hover>td{
+            background: yellow;
+        }
+        tr:last-child>td{
+            background:green;
+        }
+
+        i.tooltip {font-style:normal; }
+        i.tooltip strong {line-height:30px;}
+        i.tooltip:hover {text-decoration:none;} 
+        i.tooltip span {
+            z-index:10;display:none; padding:14px 20px;
+            margin-top:-45px; margin-left:55px;
+            width:150px; line-height:16px;
+        }
+        i.tooltip:hover span{
+            display:inline; position:absolute; color:#111;
+            border:1px solid #DCA; background:#fffAF0;}
+        .callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;}
+            
+        /*CSS3 extras*/
+        i.tooltip span
+        {
+            border-radius:4px;
+            box-shadow: 5px 5px 8px #CCC;
+        }
+    </style>
+
+
+ 
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="main.js"></script>
+
+</head>
+
+<body ng-controller="MainCtrl as main">
+    <div class="container">
+        <table>
+            <tr>
+                <th ng-click="main.sortBy = 'pos'" > Pos#</th>
+                <th ng-click="main.sortBy = 'model'">Model</th>
+                <th ng-click="main.orderBy = 'price'">Price</th>
+                <th ng-click="main.orderBy = 'image'">Image</th>
+            </tr>
+            <tr ng-repeat="car in main.cars | byContinent:main.selectedContinent | orderBy:main.orderBy " >
+                <td ng-class="car.continent"> {{ car.pos }}  </td>
+                <td ng-class="car.continent"> 
+                    <i href="#" class="tooltip">
+                        {{ car.model }} 
+                        <span ng-if="car.continent">
+                            <img class="callout" src="callout.gif" />
+                            <strong>{{car.continent}}</strong>
+                        </span>
+                    </i> 
+                </td>
+                <td ng-class="car.continent"> {{ car.price }}  </td>
+                <td ng-class="car.continent"> {{ car.image }}  </td>
+            </tr>
+            <tr>
+                <td>  </td>
+                <td> </td>
+                <td> {{ main.cars | sumByContinent:main.selectedContinent }}</td>
+                <td> </td>
+            </tr>
+        </table>
+
+
+     
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <input type="checkbox" ng-model="main.showOnlyAsians" ng-click="main.showAsian()"/>Only Asian<br/>
+                <input type="checkbox" ng-model="main.showOnlyAmerican" ng-click="main.showAmerican()"/>Only American<br/>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

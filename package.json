@@ -1,0 +1,16 @@
+{
+  "name"         : "mean-test",
+  "version"      : "0.0.1",
+  "description"  : "MEAN Test",
+  "main"         : "server.js",
+  "author"       : "motiko",
+  "dependencies" : {
+    "express"    : "~4.7.2",
+    "mongoose"   : "~3.6.2",
+    "morgan"     : "~1.2.2",
+    "body-parser": "~1.5.2",
+    "method-override": "~2.1.2",
+    "mongodb-uri" : "~0.9.7",
+    "mongodb" : "~2.0.1"
+    }
+}
